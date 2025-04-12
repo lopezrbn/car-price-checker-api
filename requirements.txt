@@ -4,3 +4,9 @@ numpy
 scikit-learn
 sqlalchemy
 xgboost
+lightgbm
+pyarrow
+fastapi
+uvicorn
+joblib
+pydantic

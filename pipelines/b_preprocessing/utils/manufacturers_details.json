@@ -1,0 +1,317 @@
+{
+    "abarth": {
+        "country": "Italy",
+        "exclusivity_level": "Premium",
+        "group": "Stellantis"
+    },
+    "aiways": {
+        "country": "China",
+        "exclusivity_level": "Electric",
+        "group": "Aiways"
+    },
+    "alfa romeo": {
+        "country": "Italy",
+        "exclusivity_level": "Premium",
+        "group": "Stellantis"
+    },
+    "alpine": {
+        "country": "France",
+        "exclusivity_level": "Luxury",
+        "group": "Renault Group"
+    },
+    "aston martin": {
+        "country": "UK",
+        "exclusivity_level": "Super Luxury",
+        "group": "Aston Martin Lagonda Global Holdings"
+    },
+    "audi": {
+        "country": "Germany",
+        "exclusivity_level": "Premium",
+        "group": "Volkswagen Group"
+    },
+    "bentley": {
+        "country": "UK",
+        "exclusivity_level": "Super Luxury",
+        "group": "Volkswagen Group"
+    },
+    "bmw": {
+        "country": "Germany",
+        "exclusivity_level": "Premium",
+        "group": "BMW Group"
+    },
+    "cadillac": {
+        "country": "USA",
+        "exclusivity_level": "Luxury",
+        "group": "General Motors"
+    },
+    "chevrolet": {
+        "country": "USA",
+        "exclusivity_level": "Mainstream",
+        "group": "General Motors"
+    },
+    "chrysler": {
+        "country": "USA",
+        "exclusivity_level": "Mainstream",
+        "group": "Stellantis"
+    },
+    "citroen": {
+        "country": "France",
+        "exclusivity_level": "Mainstream",
+        "group": "Stellantis"
+    },
+    "cupra": {
+        "country": "Spain",
+        "exclusivity_level": "Premium",
+        "group": "Volkswagen Group"
+    },
+    "dacia": {
+        "country": "Romania",
+        "exclusivity_level": "Economical",
+        "group": "Renault Group"
+    },
+    "daewoo": {
+        "country": "South Korea",
+        "exclusivity_level": "Mainstream",
+        "group": "General Motors"
+    },
+    "dfsk": {
+        "country": "China",
+        "exclusivity_level": "Economical",
+        "group": "Dongfeng Motor Corporation"
+    },
+    "dodge": {
+        "country": "USA",
+        "exclusivity_level": "Mainstream",
+        "group": "Stellantis"
+    },
+    "ds": {
+        "country": "France",
+        "exclusivity_level": "Luxury",
+        "group": "Stellantis"
+    },
+    "ferrari": {
+        "country": "Italy",
+        "exclusivity_level": "Super Luxury",
+        "group": "Ferrari N.V."
+    },
+    "fiat": {
+        "country": "Italy",
+        "exclusivity_level": "Mainstream",
+        "group": "Stellantis"
+    },
+    "ford": {
+        "country": "USA",
+        "exclusivity_level": "Mainstream",
+        "group": "Ford Motor Company"
+    },
+    "galloper": {
+        "country": "South Korea",
+        "exclusivity_level": "Mainstream",
+        "group": "Hyundai Motor Group"
+    },
+    "honda": {
+        "country": "Japan",
+        "exclusivity_level": "Mainstream",
+        "group": "Honda Motor Co."
+    },
+    "hummer": {
+        "country": "USA",
+        "exclusivity_level": "Luxury",
+        "group": "General Motors"
+    },
+    "hyundai": {
+        "country": "South Korea",
+        "exclusivity_level": "Mainstream",
+        "group": "Hyundai Motor Group"
+    },
+    "infiniti": {
+        "country": "Japan",
+        "exclusivity_level": "Luxury",
+        "group": "Nissan Motor Corporation"
+    },
+    "isuzu": {
+        "country": "Japan",
+        "exclusivity_level": "Commercial",
+        "group": "Isuzu Motors"
+    },
+    "iveco": {
+        "country": "Italy",
+        "exclusivity_level": "Commercial",
+        "group": "CNH Industrial"
+    },
+    "jaguar": {
+        "country": "UK",
+        "exclusivity_level": "Luxury",
+        "group": "Tata Motors"
+    },
+    "jeep": {
+        "country": "USA",
+        "exclusivity_level": "Mainstream",
+        "group": "Stellantis"
+    },
+    "kia": {
+        "country": "South Korea",
+        "exclusivity_level": "Mainstream",
+        "group": "Hyundai Motor Group"
+    },
+    "lancia": {
+        "country": "Italy",
+        "exclusivity_level": "Luxury",
+        "group": "Stellantis"
+    },
+    "land rover": {
+        "country": "UK",
+        "exclusivity_level": "Luxury",
+        "group": "Tata Motors"
+    },
+    "lexus": {
+        "country": "Japan",
+        "exclusivity_level": "Luxury",
+        "group": "Toyota Motor Corporation"
+    },
+    "lamborghini": {
+        "country": "Italy",
+        "exclusivity_level": "Super Luxury",
+        "group": "Volkswagen Group"
+    },
+    "mahindra": {
+        "country": "India",
+        "exclusivity_level": "Mainstream",
+        "group": "Mahindra & Mahindra"
+    },
+    "man": {
+        "country": "Germany",
+        "exclusivity_level": "Commercial",
+        "group": "Volkswagen Group"
+    },
+    "maserati": {
+        "country": "Italy",
+        "exclusivity_level": "Luxury",
+        "group": "Stellantis"
+    },
+    "maxus": {
+        "country": "China",
+        "exclusivity_level": "Commercial",
+        "group": "SAIC Motor"
+    },
+    "mazda": {
+        "country": "Japan",
+        "exclusivity_level": "Mainstream",
+        "group": "Mazda Motor Corporation"
+    },
+    "mercedes": {
+        "country": "Germany",
+        "exclusivity_level": "Premium",
+        "group": "Mercedes-Benz Group"
+    },
+    "mg": {
+        "country": "China",
+        "exclusivity_level": "Mainstream",
+        "group": "SAIC Motor"
+    },
+    "mini": {
+        "country": "UK",
+        "exclusivity_level": "Premium",
+        "group": "BMW Group"
+    },
+    "mitsubishi": {
+        "country": "Japan",
+        "exclusivity_level": "Mainstream",
+        "group": "Mitsubishi Motors"
+    },
+    "nissan": {
+        "country": "Japan",
+        "exclusivity_level": "Mainstream",
+        "group": "Nissan Motor Corporation"
+    },
+    "opel": {
+        "country": "Germany",
+        "exclusivity_level": "Mainstream",
+        "group": "Stellantis"
+    },
+    "peugeot": {
+        "country": "France",
+        "exclusivity_level": "Mainstream",
+        "group": "Stellantis"
+    },
+    "porsche": {
+        "country": "Germany",
+        "exclusivity_level": "Luxury",
+        "group": "Volkswagen Group"
+    },
+    "renault": {
+        "country": "France",
+        "exclusivity_level": "Mainstream",
+        "group": "Renault Group"
+    },
+    "rover": {
+        "country": "UK",
+        "exclusivity_level": "Luxury",
+        "group": "Tata Motors"
+    },
+    "saab": {
+        "country": "Sweden",
+        "exclusivity_level": "Luxury",
+        "group": "Saab Automobile"
+    },
+    "seat": {
+        "country": "Spain",
+        "exclusivity_level": "Mainstream",
+        "group": "Volkswagen Group"
+    },
+    "skoda": {
+        "country": "Czech Republic",
+        "exclusivity_level": "Mainstream",
+        "group": "Volkswagen Group"
+    },
+    "smart": {
+        "country": "Germany",
+        "exclusivity_level": "Economical",
+        "group": "Mercedes-Benz Group"
+    },
+    "ssangyong": {
+        "country": "South Korea",
+        "exclusivity_level": "Mainstream",
+        "group": "SsangYong Motor"
+    },
+    "subaru": {
+        "country": "Japan",
+        "exclusivity_level": "Mainstream",
+        "group": "Subaru Corporation"
+    },
+    "suzuki": {
+        "country": "Japan",
+        "exclusivity_level": "Mainstream",
+        "group": "Suzuki Motor Corporation"
+    },
+    "swm": {
+        "country": "Italy",
+        "exclusivity_level": "Mainstream",
+        "group": "SWM Motor"
+    },
+    "tesla": {
+        "country": "USA",
+        "exclusivity_level": "Luxury",
+        "group": "Tesla, Inc."
+    },
+    "toyota": {
+        "country": "Japan",
+        "exclusivity_level": "Mainstream",
+        "group": "Toyota Motor Corporation"
+    },
+    "volkswagen": {
+        "country": "Germany",
+        "exclusivity_level": "Mainstream",
+        "group": "Volkswagen Group"
+    },
+    "volvo": {
+        "country": "Sweden",
+        "exclusivity_level": "Premium",
+        "group": "Geely"
+    },
+    "wuling": {
+        "country": "China",
+        "exclusivity_level": "Economical",
+        "group": "SAIC Motor"
+    }
+}
