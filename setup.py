@@ -21,6 +21,9 @@ setup(
         "lightgbm",
         "pyarrow",
         "joblib",
+        "fastapi",
+        "gunicorn",
+        "uvicorn",
     ],
     include_package_data=True,
     classifiers=[

@@ -9,9 +9,10 @@ from sqlalchemy import create_engine
 
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
+from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
-from sklearn.linear_model import Ridge
 from sklearn.metrics import make_scorer, r2_score
 
 
@@ -61,20 +62,44 @@ def evaluate_and_select_best_model(df, preproc_pipeline, scoring="r2"):
     #    Observa que el "model" es un paso, así que "model: [RandomForestRegressor(), XGBRegressor()]" 
     #    permite a GridSearchCV probar ambos modelos.
     param_grid = [
-        # {
-        #     "model": [RandomForestRegressor()],
-        #     "model__n_estimators": [100, 200],
-        #     "model__max_depth": [10, 20]
-        # },
+        # Linear Regression (sin hiperparámetros)
+        {
+            "model": [LinearRegression()]
+        },
+        # Ridge
+        {
+            "model": [Ridge()],
+            "model__alpha": [0.1, 1.0, 10.0, 100.0]
+        },
+        # Lasso
+        {
+            "model": [Lasso(max_iter=10000)],
+            "model__alpha": [0.01, 0.1, 1.0, 10.0]
+        },
+        # Decision Tree
+        {
+            "model": [DecisionTreeRegressor()],
+            "model__max_depth": [5, 10, 20, None],
+            "model__min_samples_split": [2, 5],
+            "model__min_samples_leaf": [1, 2]
+        },
+        # Random Forest
+        {
+            "model": [RandomForestRegressor()],
+            "model__n_estimators": [100, 200, 300],
+            "model__max_depth": [10, 20, None],
+            "model__min_samples_split": [2, 5],
+            "model__min_samples_leaf": [1, 2]
+        },
+        # XGBoost
         {
             "model": [XGBRegressor(use_label_encoder=False, eval_metric="rmse")],
             "model__n_estimators": [100, 200],
-            "model__max_depth": [6, 10]
-        },
-        # {
-        #     "model": [Ridge()],
-        #     "model__alpha": [1.0, 10.0, 100.0]
-        # }
+            "model__max_depth": [6, 10],
+            "model__learning_rate": [0.05, 0.1],
+            "model__subsample": [0.8, 1.0],
+            "model__colsample_bytree": [0.8, 1.0]
+        }
     ]
 
     # Si quisieras una métrica distinta a 'r2', por ejemplo 'neg_mean_squared_error', 

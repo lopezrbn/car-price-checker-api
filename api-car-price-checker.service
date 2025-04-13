@@ -1,0 +1,15 @@
+[Unit]
+Description=API to predict car prices
+After=network.target
+
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/car_price_checker_2
+ExecStart=/home/ubuntu/car_price_checker_2/.venv/bin/gunicorn pipelines.d_inference.API:app \
+          -k uvicorn.workers.UvicornWorker \
+          --bind 0.0.0.0:8003
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
