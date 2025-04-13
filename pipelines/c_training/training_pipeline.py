@@ -6,6 +6,7 @@ import numpy as np
 import json
 import joblib
 from sqlalchemy import create_engine
+from datetime import datetime
 
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
@@ -135,7 +136,8 @@ if __name__ == "__main__":
         db_credentials = json.load(f)
 
     print("Loading data from database...")
-    query = "SELECT * FROM public.cars_scraped"
+    current_month = datetime.now().month
+    query = f"SELECT * FROM public.cars_scraped WHERE EXTRACT(MONTH FROM created_at) = {current_month};"
     engine = create_engine_connection(db_credentials)
     df = pd.read_sql(query, engine)
     print("\tData loaded\n")
