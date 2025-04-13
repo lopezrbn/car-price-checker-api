@@ -17,6 +17,7 @@ setup(
         "numpy",
         "scikit-learn",
         "sqlalchemy",
+        "psycopg2-binary",
         "xgboost",
         "lightgbm",
         "pyarrow",
