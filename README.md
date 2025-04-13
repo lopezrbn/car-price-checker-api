@@ -6,7 +6,8 @@
 
 This repository covers the **backend component** of the system, including data pipelines, model training, and a REST API for real-time inference. A separate repository [car-price-checker-webapp](https://github.com/lopezrbn/car-price-checker-webapp) contains the frontend interface used by end users.
 
-The working webapp can be used at [https://car-price-checker.lopezrbn.com/](https://car-price-checker.lopezrbn.com/).
+The app is live at:  
+👉 [https://car-price-checker.lopezrbn.com/](https://car-price-checker.lopezrbn.com/)
 
 ---
 
