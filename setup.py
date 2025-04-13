@@ -26,6 +26,7 @@ setup(
         "gunicorn",
         "uvicorn",
         "requests",
+        "beautifulsoup4",
     ],
     include_package_data=True,
     classifiers=[

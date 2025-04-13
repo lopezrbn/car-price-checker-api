@@ -13,3 +13,4 @@ uvicorn
 gunicorn
 pydantic
 requests
+beautifulsoup4
