@@ -143,8 +143,8 @@ Feel free to use, modify, and distribute the code with attribution.
 
 If you have any questions, suggestions, or feedback, feel free to reach out:
 
-**Rubén López**  
-Data Scientist  
-📧 lopezrbn@gmail.com
+- **Rubén López**  
+- Data Scientist  
+- 📧 lopezrbn@gmail.com
 
 ---
