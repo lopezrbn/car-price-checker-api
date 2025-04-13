@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="car_price_checker_2",
+    name="car_price_checker_api",
     version="0.1.0",
     description="Pipeline project for car price checking",
     long_description=open("README.md", encoding="utf-8").read(),
@@ -24,6 +24,7 @@ setup(
         "fastapi",
         "gunicorn",
         "uvicorn",
+        "requests",
     ],
     include_package_data=True,
     classifiers=[

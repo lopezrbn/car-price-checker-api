@@ -6,7 +6,9 @@ sqlalchemy
 xgboost
 lightgbm
 pyarrow
+joblib
 fastapi
 uvicorn
-joblib
+gunicorn
 pydantic
+requests
