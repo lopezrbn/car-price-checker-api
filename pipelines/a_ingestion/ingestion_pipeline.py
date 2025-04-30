@@ -9,6 +9,7 @@ from datetime import datetime
 import logging
 import sys
 import traceback
+from python_mailer import send_email
 
 from pipelines.a_ingestion.utils.cars_scraper import cars_scraper
 
@@ -172,6 +173,14 @@ def _clean_pipeline(df):
 
 def main(manufacturer_param=None, model_param=None):
 
+    start_time = datetime.now()
+    send_email(
+        credentials=str(paths.EMAIL_CREDENTIALS_FILE),
+        subject="Car-price-checker ingestion pipeline started",
+        body=f"The ingestion pipeline of the car-price-checker project has started at {start_time.strftime('%Y-%m-%d %H:%M:%S')}."
+    )
+
+
     state = _load_for_loop_state(manufacturer_param, model_param)
 
     initial_manufacturer_index = state["initial_manufacturer_index"]
@@ -213,6 +222,16 @@ def main(manufacturer_param=None, model_param=None):
         initial_model_index = 0
 
     os.remove(PATH_FOR_LOOP_STATE)
+
+    # Send email with the time taken
+    end_time = datetime.now()
+    delta = end_time - start_time
+    days = delta.days
+    send_email(
+        credentials=str(paths.EMAIL_CREDENTIALS_FILE),
+        subject="Car-price-checker ingestion pipeline finished",
+        body=f"The ingestion pipeline of the car-price-checker project has finished at {end_time.strftime('%Y-%m-%d %H:%M:%S')}. The total time taken was {days}d {delta.strftime('%H:%M:%S')}."
+    )
     
 
 if __name__ == "__main__":
