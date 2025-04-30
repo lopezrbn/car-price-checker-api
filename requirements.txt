@@ -14,3 +14,4 @@ gunicorn
 pydantic
 requests
 beautifulsoup4
+git+https://github.com/lopezrbn/python_mailer.git
