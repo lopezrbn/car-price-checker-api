@@ -1,5 +1,6 @@
-# db_credentials
+# credentials
 db_credentials.json
+email_credentials.json
 
 # data
 data/cars_scraped/*
