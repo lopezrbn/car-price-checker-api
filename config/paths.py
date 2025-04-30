@@ -14,6 +14,7 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 CONFIG_DIR = ROOT_DIR / 'config'
 # Files
 DB_CREDENTIALS_FILE = CONFIG_DIR / 'db_credentials.json'
+EMAIL_CREDENTIALS_FILE = CONFIG_DIR / 'email_credentials.json'
 CARS_TO_SCRAPE_FILE = CONFIG_DIR / 'cars_to_scrape.json'
 
 """DATA"""
