@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 # Global constants
-pass
+RANDOM_SEED = 31415
 
 # Define the base directory of the project
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -22,6 +22,9 @@ DATA_DIR = ROOT_DIR / 'data'
 
 """LOGS"""
 LOGS_DIR = ROOT_DIR / 'logs'
+
+"""MLFLOW"""
+MLRUNS_DIR = ROOT_DIR / 'mlruns'
 
 """MODELS"""
 # Dir
