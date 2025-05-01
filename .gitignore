@@ -10,6 +10,9 @@ data/cars_scraped/*
 logs/*
 !logs/
 
+# mlruns
+mlruns/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
