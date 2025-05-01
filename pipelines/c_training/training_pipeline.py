@@ -9,12 +9,16 @@ from sqlalchemy import create_engine
 from datetime import datetime
 
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
-from sklearn.metrics import make_scorer, r2_score
+from sklearn.metrics import make_scorer, r2_score, mean_absolute_error, mean_squared_error
+
+
+import mlflow
+import mlflow.sklearn
 
 
 def create_engine_connection(db_credentials: dict):
@@ -22,7 +26,7 @@ def create_engine_connection(db_credentials: dict):
         f"postgresql+psycopg2://{db_credentials['user']}:{db_credentials['password']}@{db_credentials['host']}:{db_credentials['port']}/{db_credentials['dbname']}"
     )
 
-def evaluate_and_select_best_model(df, preproc_pipeline, scoring="r2"):
+def evaluate_and_select_best_model(X, y, preproc_pipeline, scoring="r2"):
     """
     Evalúa varios modelos con distintos hiperparámetros usando GridSearchCV
     y elige el mejor según una métrica (por defecto, R²).
@@ -48,8 +52,8 @@ def evaluate_and_select_best_model(df, preproc_pipeline, scoring="r2"):
     """
 
     # 1) Separamos X, y
-    X = df.drop(columns=["price_cash"])
-    y = df["price_cash"]
+    # X = df.drop(columns=["price_cash"])
+    # y = df["price_cash"]
 
     # 2) Definimos un pipeline que tenga 2 pasos:
     #    - "preprocessor": tu pipeline de preprocesamiento (feature engineering + encoding)
@@ -132,25 +136,71 @@ def evaluate_and_select_best_model(df, preproc_pipeline, scoring="r2"):
 
     
 if __name__ == "__main__":
+
+    # Load database credentials
     with paths.DB_CREDENTIALS_FILE.open("r") as f:
         db_credentials = json.load(f)
 
+    # Load data from database
     print("Loading data from database...")
-    current_month = datetime.now().month
-    query = f"SELECT * FROM public.cars_scraped WHERE EXTRACT(MONTH FROM created_at) = {current_month};"
+    current_month = datetime.now().month - 1
+    current_year = datetime.now().year
+    query = f"SELECT * FROM public.cars_scraped WHERE EXTRACT(YEAR FROM created_at) = {current_year} AND EXTRACT(MONTH FROM created_at) = {current_month};"
     engine = create_engine_connection(db_credentials)
     df = pd.read_sql(query, engine)
     print("\tData loaded\n")
 
+    # Preprocess data
     print("Loading preprocessing pipeline...")
     preproc = PreprocessingPipeline()
     preproc_pipeline = preproc.create_pipeline(df)
     print("\tPreprocessing pipeline loaded\n")
 
-    print("Evaluating models...")
-    best_model, best_score, search_obj = evaluate_and_select_best_model(df, preproc_pipeline=preproc_pipeline)
-    print("\tModels evaluated\n")
-    
+    # Create X and y and train-test split
+    X = df.drop(columns=["price_cash"]).copy()
+    y = df["price_cash"].copy()
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=paths.RANDOM_SEED)
+
+    # Set MLFlow experiment
+    mlflow.set_experiment("car-price-prediction-training-pipeline")
+
+    with mlflow.start_run(run_name=f"training_pipeline_run_{current_year}{current_month.zfill(2)}") as run:
+        
+        print("Evaluating models...")
+        best_model, best_score, search_obj = evaluate_and_select_best_model(X_train, y_train, preproc_pipeline=preproc_pipeline)
+        print("\tModels evaluated\n")
+
+        # Log hyperparameters of the best model
+        best_params = search_obj.best_params_
+        for param_name, value in best_params.items():
+            mlflow.log_param(param_name, value)
+        # Log the best score for the best model
+        mlflow.log_metric("best_score_r2", best_score)
+        # Log best model
+        mlflow.sklearn.log_model(best_model, artifact_path="model")
+
+        # Log metrics on the train set
+        y_train_pred = best_model.predict(X_train)
+        r2_train = r2_score(y_train, y_train_pred)
+        mae_train = mean_absolute_error(y_train, y_train_pred)
+        mse_train = mean_squared_error(y_train, y_train_pred)
+        rmse_train = np.sqrt(mse_train)
+        mlflow.log_metric("r2_train", r2_train)
+        mlflow.log_metric("mae_train", mae_train)
+        mlflow.log_metric("mse_train", mse_train)
+        mlflow.log_metric("rmse_train", rmse_train)
+
+        # Log metrics on the test set
+        y_pred = best_model.predict(X_test)
+        r2 = r2_score(y_test, y_pred)
+        mae = mean_absolute_error(y_test, y_pred)
+        mse = mean_squared_error(y_test, y_pred)
+        rmse = np.sqrt(mse)
+        mlflow.log_metric("r2_test", r2)
+        mlflow.log_metric("mae_test", mae)
+        mlflow.log_metric("mse_test", mse)
+        mlflow.log_metric("rmse_test", rmse)
+
     print("Best score:")
     print(best_score)
     print("Best model:")
