@@ -180,7 +180,6 @@ def main(manufacturer_param=None, model_param=None):
         body=f"The ingestion pipeline of the car-price-checker project has started at {start_time.strftime('%Y-%m-%d %H:%M:%S')}."
     )
 
-
     state = _load_for_loop_state(manufacturer_param, model_param)
 
     initial_manufacturer_index = state["initial_manufacturer_index"]
@@ -227,10 +226,14 @@ def main(manufacturer_param=None, model_param=None):
     end_time = datetime.now()
     delta = end_time - start_time
     days = delta.days
+    total_seconds = delta.total_seconds()
+    hours, remainder = divmod(total_seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    
     send_email(
         credentials=str(paths.EMAIL_CREDENTIALS_FILE),
         subject="Car-price-checker ingestion pipeline finished",
-        body=f"The ingestion pipeline of the car-price-checker project has finished at {end_time.strftime('%Y-%m-%d %H:%M:%S')}. The total time taken was {days}d {delta.strftime('%H:%M:%S')}."
+        body=f"The ingestion pipeline of the car-price-checker project has finished at {end_time.strftime('%Y-%m-%d %H:%M:%S')}. The total time taken was {days}d {int(hours)}h {int(minutes)}m {int(seconds)}s."
     )
     
 
