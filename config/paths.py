@@ -24,7 +24,8 @@ DATA_DIR = ROOT_DIR / 'data'
 LOGS_DIR = ROOT_DIR / 'logs'
 
 """MLFLOW"""
-MLRUNS_DIR = ROOT_DIR / 'mlruns'
+# MLRUNS_DIR = ROOT_DIR / 'mlruns'
+TRACKING_URI = "http://mlflow.lopezrbn.com"
 
 """MODELS"""
 # Dir
