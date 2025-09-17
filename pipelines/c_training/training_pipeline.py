@@ -1,5 +1,7 @@
 import config.paths as paths
 from pipelines.b_preprocessing.preprocessing_pipeline import PreprocessingPipeline
+from dotenv import load_dotenv
+load_dotenv()
 
 import pandas as pd
 import numpy as np
@@ -16,10 +18,11 @@ from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
 from sklearn.metrics import make_scorer, r2_score, mean_absolute_error, mean_squared_error
 
-
 import mlflow
 import mlflow.sklearn
 
+CURRENT_YEAR = datetime.now().year
+CURRENT_MONTH = datetime.now().month
 
 def create_engine_connection(db_credentials: dict):
     return create_engine(
@@ -135,7 +138,9 @@ def evaluate_and_select_best_model(X, y, preproc_pipeline, scoring="r2"):
     return best_model, best_score, search
 
     
-if __name__ == "__main__":
+def main(year=CURRENT_YEAR, month=CURRENT_MONTH):
+
+    MODEL_PATH_ACTUAL_MONTH = paths.MODELS_DIR / f"{year}{str(month).zfill(2)}_best_model.pkl"
 
     # Load database credentials
     with paths.DB_CREDENTIALS_FILE.open("r") as f:
@@ -143,9 +148,8 @@ if __name__ == "__main__":
 
     # Load data from database
     print("Loading data from database...")
-    current_month = datetime.now().month - 1
-    current_year = datetime.now().year
-    query = f"SELECT * FROM public.cars_scraped WHERE EXTRACT(YEAR FROM created_at) = {current_year} AND EXTRACT(MONTH FROM created_at) = {current_month};"
+
+    query = f"SELECT * FROM public.cars_scraped WHERE EXTRACT(YEAR FROM created_at) = {year} AND EXTRACT(MONTH FROM created_at) = {month};"
     engine = create_engine_connection(db_credentials)
     df = pd.read_sql(query, engine)
     print("\tData loaded\n")
@@ -161,10 +165,12 @@ if __name__ == "__main__":
     y = df["price_cash"].copy()
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=paths.RANDOM_SEED)
 
+    # Set MLFlow tracking URI
+    mlflow.set_tracking_uri(paths.TRACKING_URI)
     # Set MLFlow experiment
     mlflow.set_experiment("car-price-prediction-training-pipeline")
 
-    with mlflow.start_run(run_name=f"training_pipeline_run_{current_year}{current_month.zfill(2)}") as run:
+    with mlflow.start_run(run_name=f"training_pipeline_run_{year}{str(month).zfill(2)}") as run:
         
         print("Evaluating models...")
         best_model, best_score, search_obj = evaluate_and_select_best_model(X_train, y_train, preproc_pipeline=preproc_pipeline)
@@ -207,5 +213,13 @@ if __name__ == "__main__":
     print(best_model)
 
     print("Saving best model...")
-    joblib.dump(best_model, paths.BEST_MODEL_FILE)
+    joblib.dump(best_model, MODEL_PATH_ACTUAL_MONTH)
     print("\tBest model saved\n")
+
+if __name__ == "__main__":
+
+    main(CURRENT_YEAR, CURRENT_MONTH)
+    # for month in range(5, 1, -1):
+    #     print(f"\n\n\n\nTRAINING MODEL FOR {CURRENT_YEAR}{str(month).zfill(2)}")
+    #     main(CURRENT_YEAR, month)
+    #     print(f"MODEL FOR {CURRENT_YEAR}-{str(month).zfill(2)} TRAINED AND SAVED\n\n\n\n")
