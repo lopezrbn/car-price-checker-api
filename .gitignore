@@ -6,6 +6,9 @@ email_credentials.json
 data/cars_scraped/*
 !data/cars_scraped/
 
+# models
+models/*
+
 # logs
 logs/*
 !logs/
