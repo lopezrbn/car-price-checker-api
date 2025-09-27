@@ -9,6 +9,10 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 
 # Define the rest of the directories relative to the base directory, and their files
 
+"""VIRTUAL ENVIRONMENT"""
+VENV = ROOT_DIR / ".venv"
+PYTHON = VENV / "bin/python3"
+
 """CONFIG"""
 # Dir
 CONFIG_DIR = ROOT_DIR / 'config'
