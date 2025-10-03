@@ -41,16 +41,14 @@ The frontend is not included here and can be found in the companion repo.
 
 ## 🧭 System Architecture
 
-```
-[coches.com] → [Ingestion Pipeline] → [PostgreSQL DB]
-                                 ↓
-                          [Preprocessing Pipeline]
-                                 ↓
-                          [Training Pipeline]
-                                 ↓
-                           [Saved Model.pkl]
-                                 ↓
-                      [FastAPI REST Inference API]
+```mermaid
+flowchart TD
+    A[coches.com] --> B[Ingestion Pipeline]
+    B --> C[(PostgreSQL DB)]
+    C --> D[Preprocessing Pipeline]
+    D --> E[Training Pipeline + MLflow]
+    E --> F[Saved Model.pkl]
+    F --> G[FastAPI REST Inference API]
 ```
 
 ---
