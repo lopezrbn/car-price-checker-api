@@ -104,9 +104,9 @@ def on_dag_failure(context):
 # ----------DAG definition----------
 with DAG(
     dag_id="dag_pipelines_car_price_checker",
-    start_date=datetime(2025, 10, 1),   # start date
+    start_date=datetime(2025, 9, 1),    # start date
     schedule="0 0 1 * *",               # cron: each first day of the month at midnight
-    catchup=False,                      # don't run past dates
+    catchup=True,                       # run past dates
     max_active_runs=1,                  # only one active run of this DAG at a time
     on_success_callback=on_dag_success, # callback on overall DAG success
     on_failure_callback=on_dag_failure, # callback on overall DAG failure
@@ -117,6 +117,7 @@ with DAG(
     ingestion = BashOperator(
         task_id="run_ingestion",
         bash_command=f"{paths.PYTHON} {paths.PIPELINES_DIR}/a_ingestion/ingestion_pipeline.py",
+        env={"PYTHONPATH": str(paths.ROOT_DIR)},  # set PYTHONPATH to project root
         on_execute_callback=on_task_execute,    # callback on task start
         on_success_callback=on_task_success,    # callback on task success
         on_failure_callback=on_task_failure,    # callback on task failure
@@ -126,6 +127,7 @@ with DAG(
     training = BashOperator(
         task_id="run_training",
         bash_command=f"{paths.PYTHON} {paths.PIPELINES_DIR}/c_training/training_pipeline.py",
+        env={"PYTHONPATH": str(paths.ROOT_DIR)},  # set PYTHONPATH to project root
         on_execute_callback=on_task_execute,    # callback on task start
         on_success_callback=on_task_success,    # callback on task success
         on_failure_callback=on_task_failure,    # callback on task failure
