@@ -117,10 +117,12 @@ with DAG(
     ingestion = BashOperator(
         task_id="run_ingestion",
         bash_command=f"{paths.PYTHON} {paths.PIPELINES_DIR}/a_ingestion/ingestion_pipeline.py",
-        env={"PYTHONPATH": str(paths.ROOT_DIR)},  # set PYTHONPATH to project root
-        on_execute_callback=on_task_execute,    # callback on task start
-        on_success_callback=on_task_success,    # callback on task success
-        on_failure_callback=on_task_failure,    # callback on task failure
+        env={"PYTHONPATH": str(paths.ROOT_DIR)},    # set PYTHONPATH to project root
+        retries=10,                                 # number of retries if the task fails
+        retry_delay=300,                            # delay between retries in seconds
+        on_execute_callback=on_task_execute,        # callback on task start
+        on_success_callback=on_task_success,        # callback on task success
+        on_failure_callback=on_task_failure,        # callback on task failure
     )
 
     # Task 2: Training
@@ -128,9 +130,11 @@ with DAG(
         task_id="run_training",
         bash_command=f"{paths.PYTHON} {paths.PIPELINES_DIR}/c_training/training_pipeline.py",
         env={"PYTHONPATH": str(paths.ROOT_DIR)},  # set PYTHONPATH to project root
-        on_execute_callback=on_task_execute,    # callback on task start
-        on_success_callback=on_task_success,    # callback on task success
-        on_failure_callback=on_task_failure,    # callback on task failure
+        retries=10,                               # number of retries if the task fails
+        retry_delay=300,                          # delay between retries in seconds
+        on_execute_callback=on_task_execute,      # callback on task start
+        on_success_callback=on_task_success,      # callback on task success
+        on_failure_callback=on_task_failure,      # callback on task failure
     )
 
     ingestion >> training  # dependency: first ingestion, then training
