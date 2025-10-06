@@ -219,7 +219,3 @@ def main(year=CURRENT_YEAR, month=CURRENT_MONTH):
 if __name__ == "__main__":
 
     main(CURRENT_YEAR, CURRENT_MONTH)
-    # for month in range(5, 1, -1):
-    #     print(f"\n\n\n\nTRAINING MODEL FOR {CURRENT_YEAR}{str(month).zfill(2)}")
-    #     main(CURRENT_YEAR, month)
-    #     print(f"MODEL FOR {CURRENT_YEAR}-{str(month).zfill(2)} TRAINED AND SAVED\n\n\n\n")
