@@ -2,7 +2,7 @@ import os
 import config.paths as paths
 from pipelines.b_preprocessing.preprocessing_pipeline import PreprocessingPipeline
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(dotenv_path=paths.DOTENV_FILE)
 
 import pandas as pd
 import numpy as np

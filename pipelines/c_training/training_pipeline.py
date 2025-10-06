@@ -1,7 +1,7 @@
 import config.paths as paths
 from pipelines.b_preprocessing.preprocessing_pipeline import PreprocessingPipeline
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(dotenv_path=paths.DOTENV_FILE, override=False)  # Load .env file, and do not override existing env vars if they exist
 
 import pandas as pd
 import numpy as np
