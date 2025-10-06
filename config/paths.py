@@ -17,6 +17,7 @@ PYTHON = VENV / "bin/python3"
 # Dir
 CONFIG_DIR = ROOT_DIR / 'config'
 # Files
+DOTENV_FILE = CONFIG_DIR / '.env'
 DB_CREDENTIALS_FILE = CONFIG_DIR / 'db_credentials.json'
 EMAIL_CREDENTIALS_FILE = CONFIG_DIR / 'email_credentials.json'
 CARS_TO_SCRAPE_FILE = CONFIG_DIR / 'cars_to_scrape.json'
