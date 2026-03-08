@@ -60,7 +60,8 @@ def cars_scraper(manuf, mod):
     # We look for the number of total cars_to_get, so we can calculate the number of pages to scrape as cars_to_get/20,
     # since each page shows 20 cars. If the number of cars is less than 20, we scrape only the first page.
     # The class of the element containing the subtitle is class_to_find.
-    class_to_find = "Typography-module_typography__ZANXY font-body-m SearchClassifiedSearch_description__L__Eb"
+    # class_to_find = "Typography-module_typography__ZANXY font-body-m SearchClassifiedSearch_description__L__Eb"
+    class_to_find = "Typography-module_typography__ZANXY font-body-m SearchHero_description__7g2Gj"
     subtitle_element = soup.find("p", class_=class_to_find)
     if subtitle_element:
         try:
@@ -134,8 +135,10 @@ def cars_scraper(manuf, mod):
 
                 # Here we are looking for the exact version of the car, which is above the main image of the car.
                 # manufacturer and model are already in the link, so we only need to find the version.
-                class_to_find = "Typography-module_typography__ZANXY font-body-m text-overflow-ellipsis ClassifiedHeader_version__Ruwrt"
-                version = soup.find("span", class_=class_to_find).text.strip()
+                # class_to_find = "Typography-module_typography__ZANXY font-body-m text-overflow-ellipsis ClassifiedHeader_version__Ruwrt"
+                # class_to_find = "Typography-module_typography__ZANXY font-body-m text-overflow-ellipsis ClassifiedHeaderSecondHand_version__d9aL2"
+                # version = soup.find("span", class_=class_to_find).text.strip()
+                version = soup.find("p", class_="ClassifiedHeaderSecondHand_version__d9aL2").get_text(strip=True)
                 row.append(version)
 
                 # Here we are looking for the box below the main image of the car, which contains the overview of the car,
